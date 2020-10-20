@@ -1726,6 +1726,45 @@ class Client(object):
 
         """
         return self._get('openOrders', True, data=params)
+    
+    # Wallet Endpoints
+    def get_account_snapshot(self, **params):
+        """Get daily wallet snapshot
+
+        https://binance-docs.github.io/apidocs/spot/en/#daily-account-snapshot-user_data
+
+        :returns: API response
+
+        .. code-block:: python
+        
+        {
+        "code":200, // 200 for success; others are error codes
+        "msg":"", // error message
+        "snapshotVos":[
+            {
+                "data":{
+                "balances":[
+                    {
+                        "asset":"BTC",
+                        "free":"0.09905021",
+                        "locked":"0.00000000"
+                    },
+                    {
+                        "asset":"USDT",
+                        "free":"1.89109409",
+                        "locked":"0.00000000"
+                    }
+                ],
+                "totalAssetOfBtc":"0.09942700"
+                },
+                "type":"spot",
+                "updateTime":1576281599000
+            }
+        ]
+        }
+        """
+        return self._request_margin_api('get', 'accountSnapshot', True, data=params)
+    
 
     # User Stream Endpoints
     def get_account(self, **params):

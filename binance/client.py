@@ -2595,7 +2595,17 @@ class Client(object):
         """
         params['type'] = 1
         return self._request_margin_api('post', 'margin/transfer', signed=True, data=params)
-
+    
+    
+    def get_margin_transfer(self, **params):
+        """Returns transfer history between spot and margin wallets.
+        
+        https://binance-docs.github.io/apidocs/spot/en/#get-cross-margin-transfer-history-user_data
+        
+        """
+        return self._request_margin_api('get', 'margin/transfer', signed=True, data=params)
+    
+    
     def create_margin_loan(self, **params):
         """Apply for a loan.
 
@@ -3606,7 +3616,7 @@ class Client(object):
         """
         return self._request_futures_api('get', 'ticker/leverageBracket', data=params)
 
-    def transfer_history(self, **params):
+    def futures_transfer_history(self, **params):
         """Get future account transaction history list
 
         https://binance-docs.github.io/apidocs/futures/en/#new-future-account-transfer

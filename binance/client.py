@@ -3751,3 +3751,34 @@ class Client(object):
 
         """
         return self._request_futures_api('get', 'income', True, data=params)
+    
+    
+    def get_universal_transfer_history(self, **params):
+        """
+        type        ENUM    YES
+        startTime   LONG    NO
+        endTime     LONG    NO
+        current     INT     NO  Default 1
+        size        INT     NO  Default 10, Max 100
+        recvWindow  LONG    NO
+        timestamp   LONG    YES
+        
+        MAIN_C2C        Spot account transfer to C2C account
+        MAIN_UMFUTURE   Spot account transfer to USDT-M Futures account
+        MAIN_CMFUTURE   Spot account transfer to COIN-M Futures account
+        MAIN_MARGIN     Spot account transfer to Margin (cross) account
+        MAIN_MINING     Spot account transfer to Mining account
+        C2C_MAIN        C2C account transfer to Spot account
+        C2C_UMFUTURE    C2C account transfer to USDT-M Futures account
+        C2C_MINING      C2C account transfer to Mining account
+        UMFUTURE_MAIN   USDT-M Futures account transfer to Spot account
+        UMFUTURE_C2C    USDT-M Futures account transfer to C2C account
+        UMFUTURE_MARGIN USDT-M Futures account transfer to Margin (cross) account
+        CMFUTURE_MAIN   COIN-M Futures account transfer to Spot account
+        MARGIN_MAIN     Margin (cross) account transfer to Spot account
+        MARGIN_UMFUTURE Margin (cross) account transfer to USDT-M Futures
+        MINING_MAIN     Mining account transfer to Spot account
+        MINING_UMFUTURE Mining account transfer to USDT-M Futures account
+        MINING_C2C      Mining account transfer to C2C account
+        """
+        return self._request_margin_api('get', 'asset/transfer', True, data=params)
